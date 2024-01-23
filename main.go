@@ -1,10 +1,14 @@
 package main
 
 import (
+	"log"
+	"os"
+
 	"encoding/json"
 	"net/http"
 	"strings"
 
+	_ "github.com/joho/godotenv/autoload"
 	"github.com/supertokens/supertokens-golang/recipe/multitenancy"
 	"github.com/supertokens/supertokens-golang/recipe/session"
 	"github.com/supertokens/supertokens-golang/supertokens"
@@ -17,7 +21,15 @@ func main() {
 		panic(err.Error())
 	}
 
-	http.ListenAndServe(":3001", corsMiddleware(
+
+	PORT := os.Getenv("PORT");
+	if(len(PORT) == 0) {
+		PORT = "3001"
+	}
+
+	log.Printf("Starting Server on Port %s", PORT);
+
+	http.ListenAndServe(":" + PORT, corsMiddleware(
 		supertokens.Middleware(http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
 			// Handle your APIs..
 

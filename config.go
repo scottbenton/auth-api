@@ -20,6 +20,16 @@ func createSuperTokensConfig() supertokens.TypeInput {
 
 	var superTokensAPIDomain = os.Getenv("AUTH_API_DOMAIN")
 	var superTokensUIDomain = os.Getenv("AUTH_UI_DOMAIN")
+	var superTokensUIPath = os.Getenv("AUTH_UI_PATH")
+
+	var googleOAuthClientId = os.Getenv("GOOGLE_OAUTH_CLIENT_ID");
+	var googleOAuthClientSecret = os.Getenv("GOOGLE_OAUTH_CLIENT_SECRET");
+	
+	var githubOAuthClientId = os.Getenv("GITHUB_OAUTH_CLIENT_ID");
+	var githubOAuthClientSecret = os.Getenv("GITHUB_OAUTH_CLIENT_SECRET");
+
+	var discordOAuthClientId = os.Getenv("DISCORD_OAUTH_CLIENT_ID");
+	var discordOAuthClientSecret = os.Getenv("DISCORD_OAUTH_CLIENT_SECRET");
 	
 	var SuperTokensConfig = supertokens.TypeInput{
 		
@@ -31,6 +41,7 @@ func createSuperTokensConfig() supertokens.TypeInput {
 			AppName:       "Scott Benton Auth",
 			APIDomain:     superTokensAPIDomain,
 			WebsiteDomain: superTokensUIDomain,
+			WebsiteBasePath: &superTokensUIPath,
 		},
 		RecipeList: []supertokens.Recipe{
 			thirdpartypasswordless.Init(tplmodels.TypeInput{
@@ -38,7 +49,41 @@ func createSuperTokensConfig() supertokens.TypeInput {
 				ContactMethodEmailOrPhone: plessmodels.ContactMethodEmailOrPhoneConfig{
 					Enabled: true,
 				},
-				Providers: []tpmodels.ProviderInput{},
+				Providers: []tpmodels.ProviderInput{
+					{
+						Config: tpmodels.ProviderConfig{
+							ThirdPartyId: "google",
+							Clients: []tpmodels.ProviderClientConfig{
+								{
+									ClientID: googleOAuthClientId,
+									ClientSecret: googleOAuthClientSecret,
+								},
+							},
+						},
+					},
+					{
+						Config: tpmodels.ProviderConfig{
+							ThirdPartyId: "github",
+							Clients: []tpmodels.ProviderClientConfig{
+								{
+									ClientID: githubOAuthClientId,
+									ClientSecret: githubOAuthClientSecret,
+								},
+							},
+						},
+					},
+					{
+						Config: tpmodels.ProviderConfig{
+							ThirdPartyId: "discord",
+							Clients: []tpmodels.ProviderClientConfig{
+								{
+									ClientID: discordOAuthClientId,
+									ClientSecret: discordOAuthClientSecret,
+								},
+							},
+						},
+					},
+				},
 			}),
 			session.Init(nil), // initializes session features
 			dashboard.Init(nil),

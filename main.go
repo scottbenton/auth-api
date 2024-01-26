@@ -48,8 +48,9 @@ func main() {
 }
 
 func corsMiddleware(next http.Handler) http.Handler {
+	var superTokensUIDomain = os.Getenv("AUTH_UI_DOMAIN")
 	return http.HandlerFunc(func(response http.ResponseWriter, r *http.Request) {
-		response.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+		response.Header().Set("Access-Control-Allow-Origin", superTokensUIDomain)
 		response.Header().Set("Access-Control-Allow-Credentials", "true")
 		if r.Method == "OPTIONS" {
 			response.Header().Set("Access-Control-Allow-Headers", strings.Join(append([]string{"Content-Type"}, supertokens.GetAllCORSHeaders()...), ","))

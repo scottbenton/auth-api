@@ -1,3 +1,26 @@
 # About
 
+Run `go run .` to start the app in development
+
 ## Environment Variables
+
+For local development, create a `.env` file.
+
+```
+SUPERTOKENS_CONNECTION_URI=
+SUPERTOKENS_API_KEY=
+
+AUTH_API_DOMAIN=
+AUTH_UI_DOMAIN=
+
+AUTH_UI_PATH=/
+
+GOOGLE_OAUTH_CLIENT_ID=
+GOOGLE_OAUTH_CLIENT_SECRET=
+
+GITHUB_OAUTH_CLIENT_ID=
+GITHUB_OAUTH_CLIENT_SECRET=
+
+DISCORD_OAUTH_CLIENT_ID=
+DISCORD_OAUTH_CLIENT_SECRET=
+```

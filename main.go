@@ -43,6 +43,11 @@ func main() {
 				return
 			}
 
+			if r.URL.Path == "/user/current" && r.Method == "GET" {
+				session.VerifySession(nil, getUserInfo).ServeHTTP(rw, r)
+				return;
+			}
+
 			rw.WriteHeader(404)
 		}))))
 }

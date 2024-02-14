@@ -9,6 +9,7 @@ import (
 	"github.com/supertokens/supertokens-golang/recipe/thirdparty/tpmodels"
 	"github.com/supertokens/supertokens-golang/recipe/thirdpartypasswordless"
 	"github.com/supertokens/supertokens-golang/recipe/thirdpartypasswordless/tplmodels"
+	"github.com/supertokens/supertokens-golang/recipe/userroles"
 	"github.com/supertokens/supertokens-golang/supertokens"
 
 	_ "github.com/joho/godotenv/autoload"
@@ -87,6 +88,7 @@ func createSuperTokensConfig() supertokens.TypeInput {
 			}),
 			session.Init(nil), // initializes session features
 			dashboard.Init(nil),
+            userroles.Init(nil),
 		},
 	}
 	
